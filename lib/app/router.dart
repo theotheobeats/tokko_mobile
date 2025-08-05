@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../features/auth/sign_in_screen.dart';
 import '../features/auth/store_selection_screen.dart';
+import '../features/inventory/inventory_screen.dart';
 
 /// App Router configuration using go_router with a ShellRoute that hosts
 /// a Material 3 NavigationBar for 5 primary tabs:
@@ -491,20 +492,6 @@ class PosScreen extends StatelessWidget {
   }
 }
 
-class InventoryScreen extends StatelessWidget {
-  const InventoryScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const _PlaceholderScaffold(
-      title: 'Inventory',
-      description:
-          'Search, filters, stock indicators, and item CRUD with slidable rows.',
-      icon: Icons.inventory_2,
-    );
-    // Later: move to features/inventory with list/grid and filters
-  }
-}
 
 class StaffScreen extends StatelessWidget {
   const StaffScreen({super.key});
@@ -597,3 +584,4 @@ class _PlaceholderScaffold extends StatelessWidget {
     );
   }
 }
+
