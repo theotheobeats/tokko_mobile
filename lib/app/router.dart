@@ -243,62 +243,236 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
-      body: Center(
-        child: Card(
-          elevation: 1,
-          margin: const EdgeInsets.all(16),
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 480),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(Icons.dashboard, size: 48, color: scheme.primary),
-                  const SizedBox(height: 12),
-                  Text(
-                    'Home',
-                    style: Theme.of(context).textTheme.headlineSmall,
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Dashboard, metrics, and quick actions.',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: scheme.onSurfaceVariant,
-                        ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 16),
-                  // Temporary buttons to access Auth screens
-                  Row(
-                    children: [
-                      Expanded(
-                        child: FilledButton.tonal(
-                          onPressed: () => context.go('${HomeRoute.path}auth/sign-in'),
-                          child: const Text('Open Sign-In'),
-                        ),
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            // Top header area (Dashboard title + subtitle)
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Dashboard',
+                      style: theme.textTheme.headlineLarge?.copyWith(
+                        fontWeight: FontWeight.w800,
                       ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: FilledButton.tonal(
-                          onPressed: () => context.go('${HomeRoute.path}auth/store-selection'),
-                          child: const Text('Store Selection'),
-                        ),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      'Overview of your store performance today',
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        color: scheme.onSurfaceVariant,
                       ),
-                    ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            // Quick actions: Open POS (primary) + Inventory (tonal)
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 52,
+                      width: double.infinity,
+                      child: ElevatedButton.icon(
+                        icon: const Icon(Icons.shopping_cart_outlined),
+                        label: const Text('Open POS'),
+                        style: ButtonStyle(
+                          backgroundColor:
+                              WidgetStateProperty.all(const Color(0xFF16A34A)),
+                          foregroundColor:
+                              WidgetStateProperty.all(Colors.white),
+                          shape: WidgetStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(14),
+                            ),
+                          ),
+                          textStyle: WidgetStateProperty.all(
+                            const TextStyle(fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                        onPressed: () => context.go(PosRoute.path),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    SizedBox(
+                      height: 52,
+                      width: double.infinity,
+                      child: FilledButton.tonalIcon(
+                        icon: const Icon(Icons.inventory_2_outlined),
+                        label: const Text('Inventory'),
+                        style: ButtonStyle(
+                          shape: WidgetStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(14),
+                            ),
+                          ),
+                          textStyle: WidgetStateProperty.all(
+                            const TextStyle(fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                        onPressed: () => context.go(InventoryRoute.path),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            // Metrics cards (stacked; mimic 2x2 grid by vertical cards for mobile)
+            SliverPadding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+              sliver: SliverList.list(
+                children: const [
+                  _MetricCard(
+                    title: "Today's Sales",
+                    icon: Icons.attach_money,
+                    value: '\$0.00',
+                    subtitle: 'Compared to yesterday',
+                    trendUp: true,
+                  ),
+                  SizedBox(height: 16),
+                  _MetricCard(
+                    title: 'Transactions',
+                    icon: Icons.shopping_bag_outlined,
+                    value: '0',
+                    subtitle: 'Transactions today',
+                    trendUp: true,
+                  ),
+                  SizedBox(height: 16),
+                  _MetricCard(
+                    title: 'Low Stock Items',
+                    icon: Icons.error_outline,
+                    value: '1',
+                    subtitle: 'Items below minimum stock',
+                    trendUp: false,
                   ),
                 ],
               ),
             ),
-          ),
+
+            // Temporary shortcuts to Auth screens for QA
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: FilledButton.tonal(
+                        onPressed: () =>
+                            context.go('${HomeRoute.path}auth/sign-in'),
+                        child: const Text('Open Sign-In'),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: FilledButton.tonal(
+                        onPressed: () => context
+                            .go('${HomeRoute.path}auth/store-selection'),
+                        child: const Text('Store Selection'),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
-    // Later: replace with real dashboard implementation
+  }
+}
+
+class _MetricCard extends StatelessWidget {
+  const _MetricCard({
+    required this.title,
+    required this.icon,
+    required this.value,
+    required this.subtitle,
+    required this.trendUp,
+  });
+
+  final String title;
+  final IconData icon;
+  final String value;
+  final String subtitle;
+  final bool trendUp;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+
+    return Container(
+      decoration: BoxDecoration(
+        color: theme.brightness == Brightness.dark ? scheme.surface : Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.06),
+            blurRadius: 18,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Title row with trailing icon tint
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  title,
+                  style: theme.textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+              Icon(icon, color: scheme.onSurfaceVariant),
+            ],
+          ),
+          const SizedBox(height: 20),
+          // Value
+          Text(
+            value,
+            style: theme.textTheme.headlineMedium?.copyWith(
+              fontWeight: FontWeight.w800,
+              letterSpacing: -0.5,
+            ),
+          ),
+          const SizedBox(height: 8),
+          // Trend line
+          Row(
+            children: [
+              Icon(
+                trendUp ? Icons.north_east : Icons.south_east,
+                color: trendUp ? const Color(0xFF16A34A) : scheme.error,
+                size: 18,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                subtitle,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: scheme.onSurfaceVariant,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
 
