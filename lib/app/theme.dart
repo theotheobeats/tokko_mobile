@@ -79,8 +79,9 @@ class AppTheme {
       colorScheme: scheme,
       brightness: scheme.brightness,
       visualDensity: VisualDensity.adaptivePlatformDensity,
-      scaffoldBackgroundColor:
-          isDark ? const Color(0xFF0F1113) : const Color(0xFFF9FAFB),
+      scaffoldBackgroundColor: isDark
+          ? const Color(0xFF0F1113)
+          : const Color(0xFFF9FAFB),
       textTheme: _textTheme.apply(
         bodyColor: scheme.onBackground,
         displayColor: scheme.onBackground,
@@ -104,8 +105,9 @@ class AppTheme {
         indicatorColor: scheme.primary.withOpacity(0.15),
         elevation: 2,
         labelTextStyle: WidgetStateProperty.resolveWith((states) {
-          final selected =
-              states.contains(WidgetState.selected) ? FontWeight.w600 : FontWeight.w500;
+          final selected = states.contains(WidgetState.selected)
+              ? FontWeight.w600
+              : FontWeight.w500;
           return _textTheme.labelSmall?.copyWith(
             color: scheme.onSurfaceVariant,
             fontWeight: selected,
@@ -161,9 +163,7 @@ class AppTheme {
           shape: WidgetStateProperty.all(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           ),
-          side: WidgetStateProperty.all(
-            BorderSide(color: scheme.outline),
-          ),
+          side: WidgetStateProperty.all(BorderSide(color: scheme.outline)),
           textStyle: WidgetStateProperty.all(_textTheme.labelLarge),
         ),
       ),
@@ -184,8 +184,10 @@ class AppTheme {
         hintStyle: _textTheme.bodyMedium?.copyWith(
           color: scheme.onSurfaceVariant,
         ),
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 12,
+          vertical: 12,
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(color: scheme.outlineVariant),
@@ -209,7 +211,7 @@ class AppTheme {
       ),
 
       // Cards
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: isDark ? scheme.surface : Colors.white,
         elevation: 1,
         margin: const EdgeInsets.all(8),
@@ -220,9 +222,7 @@ class AppTheme {
       chipTheme: ChipThemeData(
         backgroundColor: scheme.surfaceContainerHighest,
         selectedColor: scheme.primary.withOpacity(0.15),
-        labelStyle: _textTheme.labelMedium?.copyWith(
-          color: scheme.onSurface,
-        ),
+        labelStyle: _textTheme.labelMedium?.copyWith(color: scheme.onSurface),
         secondaryLabelStyle: _textTheme.labelMedium?.copyWith(
           color: scheme.onSurfaceVariant,
         ),
@@ -241,8 +241,8 @@ class AppTheme {
       // Dividers
       dividerTheme: DividerThemeData(
         color: scheme.outlineVariant,
-        spacing: 0.5,
         thickness: 1,
+        space: 0.5,
       ),
 
       // List tiles
@@ -254,7 +254,7 @@ class AppTheme {
       ),
 
       // Dialogs/Bottom sheets
-      dialogTheme: DialogTheme(
+      dialogTheme: DialogThemeData(
         backgroundColor: isDark ? scheme.surface : Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         titleTextStyle: _textTheme.titleLarge?.copyWith(
