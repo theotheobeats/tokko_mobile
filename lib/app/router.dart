@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../features/auth/sign_in_screen.dart';
+import '../features/auth/store_selection_screen.dart';
 
 /// App Router configuration using go_router with a ShellRoute that hosts
 /// a Material 3 NavigationBar for 5 primary tabs:
@@ -36,7 +38,21 @@ GoRouter createAppRouter({GlobalKey<NavigatorState>? rootNavigatorKey}) {
             name: HomeRoute.name,
             pageBuilder: (context, state) =>
                 const NoTransitionPage(child: HomeScreen()),
-            routes: const [],
+            routes: [
+              // Temporary auth demo routes accessible from Home
+              GoRoute(
+                path: 'auth/sign-in',
+                name: 'auth-sign-in',
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: SignInScreen()),
+              ),
+              GoRoute(
+                path: 'auth/store-selection',
+                name: 'auth-store-selection',
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: StoreSelectionScreen()),
+              ),
+            ],
           ),
           // POS
           GoRoute(
@@ -227,12 +243,62 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const _PlaceholderScaffold(
-      title: 'Home',
-      description: 'Dashboard, metrics, and quick actions.',
-      icon: Icons.dashboard,
+    final scheme = Theme.of(context).colorScheme;
+    return Scaffold(
+      appBar: AppBar(title: const Text('Home')),
+      body: Center(
+        child: Card(
+          elevation: 1,
+          margin: const EdgeInsets.all(16),
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 480),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.dashboard, size: 48, color: scheme.primary),
+                  const SizedBox(height: 12),
+                  Text(
+                    'Home',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Dashboard, metrics, and quick actions.',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: scheme.onSurfaceVariant,
+                        ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 16),
+                  // Temporary buttons to access Auth screens
+                  Row(
+                    children: [
+                      Expanded(
+                        child: FilledButton.tonal(
+                          onPressed: () => context.go('${HomeRoute.path}auth/sign-in'),
+                          child: const Text('Open Sign-In'),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: FilledButton.tonal(
+                          onPressed: () => context.go('${HomeRoute.path}auth/store-selection'),
+                          child: const Text('Store Selection'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
     );
-    // Later: move to features/home with a proper dashboard implementation
+    // Later: replace with real dashboard implementation
   }
 }
 
