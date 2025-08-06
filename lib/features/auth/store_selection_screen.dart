@@ -22,7 +22,7 @@ class _StoreSelectionScreenState extends State<StoreSelectionScreen> {
     final scheme = theme.colorScheme;
 
     return Scaffold(
-      backgroundColor: Colors.black.withOpacity(0.5), // dim backdrop to emulate modal
+      backgroundColor: Colors.black.withValues(alpha: 0.5), // dim backdrop to emulate modal
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -140,7 +140,7 @@ class _DialogPanel extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.12),
+            color: Colors.black.withValues(alpha: 0.12),
             blurRadius: 18,
             offset: const Offset(0, 8),
           ),

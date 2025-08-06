@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 import '../features/auth/sign_in_screen.dart';
 import '../features/auth/store_selection_screen.dart';
 import '../features/inventory/inventory_screen.dart';
+import '../features/pos/pos_screen.dart' as pos;
+import '../features/staff/staff_screen.dart' as staff;
 
 /// App Router configuration using go_router with a ShellRoute that hosts
 /// a Material 3 NavigationBar for 5 primary tabs:
@@ -60,7 +62,7 @@ GoRouter createAppRouter({GlobalKey<NavigatorState>? rootNavigatorKey}) {
             path: PosRoute.path,
             name: PosRoute.name,
             pageBuilder: (context, state) =>
-                const NoTransitionPage(child: PosScreen()),
+                const NoTransitionPage(child: pos.PosScreen()),
             routes: const [],
           ),
           // Inventory
@@ -76,7 +78,7 @@ GoRouter createAppRouter({GlobalKey<NavigatorState>? rootNavigatorKey}) {
             path: StaffRoute.path,
             name: StaffRoute.name,
             pageBuilder: (context, state) =>
-                const NoTransitionPage(child: StaffScreen()),
+                const NoTransitionPage(child: staff.StaffScreen()),
             routes: const [],
           ),
           // Settings
@@ -420,7 +422,7 @@ class _MetricCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.06),
+            color: Colors.black.withValues(alpha: 0.06),
             blurRadius: 18,
             offset: const Offset(0, 8),
           ),
@@ -477,36 +479,16 @@ class _MetricCard extends StatelessWidget {
   }
 }
 
-class PosScreen extends StatelessWidget {
-  const PosScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const _PlaceholderScaffold(
-      title: 'POS',
-      description:
-          'Product grid, categories, search, and draggable order summary.',
-      icon: Icons.point_of_sale,
-    );
-    // Later: move to features/pos with product grid and order summary sheet
-  }
-}
-
 
 class StaffScreen extends StatelessWidget {
   const StaffScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const _PlaceholderScaffold(
-      title: 'Staff',
-      description:
-          'Team overview, clock-in/out status, roles, and quick actions.',
-      icon: Icons.group,
-    );
-    // Later: move to features/staff with role-based management
+    return const staff.StaffScreen();
   }
 }
+
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});

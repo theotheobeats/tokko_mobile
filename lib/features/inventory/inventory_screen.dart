@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../app/theme.dart';
-import '../../app/router.dart';
 
 class InventoryScreen extends StatelessWidget {
   const InventoryScreen({super.key});
@@ -345,7 +343,7 @@ class _CategoryFilterChip extends StatelessWidget {
       label: Text(label),
       selected: selected,
       onSelected: (_) {},
-      selectedColor: scheme.primary.withOpacity(0.12),
+      selectedColor: scheme.primary.withValues(alpha: 0.12),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
       side: BorderSide(color: scheme.outlineVariant),
     );

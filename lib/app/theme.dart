@@ -83,8 +83,8 @@ class AppTheme {
           ? const Color(0xFF0F1113)
           : const Color(0xFFF9FAFB),
       textTheme: _textTheme.apply(
-        bodyColor: scheme.onBackground,
-        displayColor: scheme.onBackground,
+        bodyColor: scheme.onSurface,
+        displayColor: scheme.onSurface,
       ),
 
       // AppBar
@@ -102,7 +102,7 @@ class AppTheme {
       // Navigation Bar (Material 3 bottom bar for 5 tabs)
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: scheme.surface,
-        indicatorColor: scheme.primary.withOpacity(0.15),
+        indicatorColor: scheme.primary.withValues(alpha: 0.15),
         elevation: 2,
         labelTextStyle: WidgetStateProperty.resolveWith((states) {
           final selected = states.contains(WidgetState.selected)
@@ -133,7 +133,7 @@ class AppTheme {
           ),
           backgroundColor: WidgetStateProperty.resolveWith((states) {
             if (states.contains(WidgetState.disabled)) {
-              return scheme.primary.withOpacity(0.38);
+              return scheme.primary.withValues(alpha: 0.38);
             }
             return scheme.primary;
           }),
@@ -221,7 +221,7 @@ class AppTheme {
       // Chips
       chipTheme: ChipThemeData(
         backgroundColor: scheme.surfaceContainerHighest,
-        selectedColor: scheme.primary.withOpacity(0.15),
+        selectedColor: scheme.primary.withValues(alpha: 0.15),
         labelStyle: _textTheme.labelMedium?.copyWith(color: scheme.onSurface),
         secondaryLabelStyle: _textTheme.labelMedium?.copyWith(
           color: scheme.onSurfaceVariant,
