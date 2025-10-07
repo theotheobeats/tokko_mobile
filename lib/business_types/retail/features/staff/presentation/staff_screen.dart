@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../../app/theme.dart';
 
 class StaffScreen extends StatelessWidget {
   const StaffScreen({super.key});
@@ -41,7 +42,7 @@ class StaffScreen extends StatelessWidget {
                         label: const Text('Add Employee'),
                         style: ButtonStyle(
                           backgroundColor:
-                              WidgetStateProperty.all(const Color(0xFF16A34A)),
+                              WidgetStateProperty.all(AppTheme.primary),
                           foregroundColor: WidgetStateProperty.all(Colors.white),
                           shape: WidgetStateProperty.all(
                             RoundedRectangleBorder(

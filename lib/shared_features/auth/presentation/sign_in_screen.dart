@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../app/theme.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -143,14 +144,14 @@ class _SignInScreenState extends State<SignInScreen> {
                             const SizedBox(height: 24),
 
                             // Sign in CTA
-                            SizedBox(
-                              height: 48,
-                              child: ElevatedButton(
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      WidgetStateProperty.all(const Color(0xFF16A34A)),
-                                  foregroundColor:
-                                      WidgetStateProperty.all(Colors.white),
+                             SizedBox(
+                               height: 48,
+                               child: ElevatedButton(
+                                 style: ButtonStyle(
+                                   backgroundColor:
+                                       WidgetStateProperty.all(AppTheme.primary),
+                                   foregroundColor:
+                                       WidgetStateProperty.all(Colors.white),
                                   shape: WidgetStateProperty.all(
                                     RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(14),

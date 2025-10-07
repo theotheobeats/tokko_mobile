@@ -7,20 +7,17 @@ class PosScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(children: const [
-          Icon(Icons.menu),
-          SizedBox(width: 8),
-          Text('Menu'),
-        ]),
+        title: const Text('Point of Sale'),
         actions: [
           IconButton(onPressed: () {}, icon: const Icon(Icons.timer_outlined)),
-          const SizedBox(width: 8),
           TextButton.icon(
             onPressed: () {},
             icon: const Icon(Icons.logout, color: Color(0xFFDC2626)),
-            label: const Text('Close', style: TextStyle(color: Color(0xFFDC2626))),
+            label: const Text(
+              'Close',
+              style: TextStyle(color: Color(0xFFDC2626)),
+            ),
           ),
-          const SizedBox(width: 8),
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
@@ -68,13 +65,15 @@ class PosScreen extends StatelessWidget {
             SliverToBoxAdapter(
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                child: Row(children: const [
-                  _CategoryPill(label: 'Coffee', color: Color(0xFFCFFAEA)),
-                  SizedBox(width: 12),
-                  _CategoryPill(label: 'Drink', color: Color(0xFFDDE3FF)),
-                  SizedBox(width: 12),
-                  _CategoryPill(label: 'Food', color: Color(0xFFFDF2C4)),
-                ]),
+                child: Row(
+                  children: const [
+                    _CategoryPill(label: 'Coffee', color: Color(0xFFCFFAEA)),
+                    SizedBox(width: 12),
+                    _CategoryPill(label: 'Drink', color: Color(0xFFDDE3FF)),
+                    SizedBox(width: 12),
+                    _CategoryPill(label: 'Food', color: Color(0xFFFDF2C4)),
+                  ],
+                ),
               ),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 12)),
@@ -159,10 +158,18 @@ class _ProductCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 12),
-              const Text('Americano', style: TextStyle(fontWeight: FontWeight.w700)),
+              const Text(
+                'Americano',
+                style: TextStyle(fontWeight: FontWeight.w700),
+              ),
               const SizedBox(height: 6),
-              const Text('Rp 12.000',
-                  style: TextStyle(color: Color(0xFF16A34A), fontWeight: FontWeight.w700)),
+              const Text(
+                'Rp 12.000',
+                style: TextStyle(
+                  color: Color(0xFF16A34A),
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
             ],
           ),
         ),
@@ -192,10 +199,19 @@ class _CheckoutSheet extends StatelessWidget {
                   const Icon(Icons.shopping_cart_outlined),
                   const SizedBox(width: 8),
                   const Expanded(
-                    child: Text('Your Order', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
+                    child: Text(
+                      'Your Order',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: scheme.surfaceContainerHighest,
                       borderRadius: BorderRadius.circular(12),
@@ -216,7 +232,10 @@ class _CheckoutSheet extends StatelessWidget {
                 controller: controller,
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
                 children: [
-                  const Text('Cashier', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800)),
+                  const Text(
+                    'Cashier',
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800),
+                  ),
                   const SizedBox(height: 4),
                   const Text('theo@tokko.com'),
                   const SizedBox(height: 16),
@@ -224,26 +243,37 @@ class _CheckoutSheet extends StatelessWidget {
                     children: const [
                       Icon(Icons.person_outline),
                       SizedBox(width: 8),
-                      Text('Customer', style: TextStyle(fontWeight: FontWeight.w600)),
+                      Text(
+                        'Customer',
+                        style: TextStyle(fontWeight: FontWeight.w600),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 8),
                   const _OutlinedField(value: 'General  (Default)'),
                   const SizedBox(height: 16),
                   Card(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.all(12),
                       child: Row(
                         children: [
                           const Expanded(
-                            child: Text('Americano', style: TextStyle(fontWeight: FontWeight.w800)),
+                            child: Text(
+                              'Americano',
+                              style: TextStyle(fontWeight: FontWeight.w800),
+                            ),
                           ),
                           _QtyControl(),
                           const SizedBox(width: 8),
                           IconButton(
                             onPressed: () {},
-                            icon: const Icon(Icons.delete_outline, color: Color(0xFFDC2626)),
+                            icon: const Icon(
+                              Icons.delete_outline,
+                              color: Color(0xFFDC2626),
+                            ),
                           ),
                         ],
                       ),
@@ -280,10 +310,15 @@ class _CheckoutSheet extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF16A34A),
                     foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14),
+                    ),
                   ),
                   onPressed: () {},
-                  child: const Text('Place Order', style: TextStyle(fontWeight: FontWeight.w700)),
+                  child: const Text(
+                    'Place Order',
+                    style: TextStyle(fontWeight: FontWeight.w700),
+                  ),
                 ),
               ),
             ),
@@ -322,7 +357,9 @@ class _QtyControl extends StatelessWidget {
   Widget build(BuildContext context) {
     final border = OutlineInputBorder(
       borderRadius: BorderRadius.circular(12),
-      borderSide: BorderSide(color: Theme.of(context).colorScheme.outlineVariant),
+      borderSide: BorderSide(
+        color: Theme.of(context).colorScheme.outlineVariant,
+      ),
     );
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -362,7 +399,9 @@ class _SquareButton extends StatelessWidget {
         onPressed: () {},
         style: OutlinedButton.styleFrom(
           padding: EdgeInsets.zero,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
         ),
         child: Icon(icon),
       ),
@@ -378,10 +417,13 @@ class _RowKV extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final styleLabel = Theme.of(context).textTheme.titleMedium;
-    final styleValue = (bold
-            ? Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800)
-            : Theme.of(context).textTheme.titleMedium)
-        ?.copyWith();
+    final styleValue =
+        (bold
+                ? Theme.of(
+                    context,
+                  ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800)
+                : Theme.of(context).textTheme.titleMedium)
+            ?.copyWith();
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
@@ -405,7 +447,9 @@ class _PayMethodChip extends StatelessWidget {
       child: OutlinedButton(
         onPressed: () {},
         style: OutlinedButton.styleFrom(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
         ),
         child: Text(label, style: const TextStyle(fontWeight: FontWeight.w600)),
       ),

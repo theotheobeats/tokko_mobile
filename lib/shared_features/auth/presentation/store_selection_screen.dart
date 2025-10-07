@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../app/theme.dart';
 
 class StoreSelectionScreen extends StatefulWidget {
   const StoreSelectionScreen({super.key});
@@ -80,11 +81,11 @@ class _StoreSelectionScreenState extends State<StoreSelectionScreen> {
                       height: 48,
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          backgroundColor: WidgetStateProperty.all(
-                            _selectedIndex == null
-                                ? const Color(0xFF86E29E) // light green (disabled look)
-                                : const Color(0xFF16A34A), // primary green
-                          ),
+                           backgroundColor: WidgetStateProperty.all(
+                             _selectedIndex == null
+                                 ? const Color(0xFF86E29E) // light green (disabled look)
+                                 : AppTheme.primary, // primary color from theme
+                           ),
                           foregroundColor:
                               WidgetStateProperty.all(Colors.white),
                           shape: WidgetStateProperty.all(
@@ -225,7 +226,7 @@ class _GreenBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
-        color: const Color(0xFF16A34A),
+        color: AppTheme.primary,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Text(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../../app/theme.dart';
 
 class InventoryScreen extends StatelessWidget {
   const InventoryScreen({super.key});
@@ -18,7 +19,7 @@ class InventoryScreen extends StatelessWidget {
         },
         icon: const Icon(Icons.add),
         label: const Text('Add Product'),
-        backgroundColor: const Color(0xFF16A34A),
+        backgroundColor: AppTheme.primary,
         foregroundColor: Colors.white,
       ),
       body: SafeArea(
@@ -368,7 +369,7 @@ class _ProductListTile extends StatelessWidget {
     } else if (stock <= 3) {
       stockColor = const Color(0xFFF59E0B); // amber-ish
     } else {
-      stockColor = const Color(0xFF16A34A); // success green
+      stockColor = AppTheme.primary; // success green
     }
 
     return Card(
