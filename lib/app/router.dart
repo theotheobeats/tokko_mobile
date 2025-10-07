@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../features/auth/sign_in_screen.dart';
-import '../features/auth/store_selection_screen.dart';
-import '../features/inventory/inventory_screen.dart';
-import '../features/pos/pos_screen.dart' as pos;
-import '../features/staff/staff_screen.dart' as staff;
+import '../shared_features/auth/presentation/sign_in_screen.dart';
+import '../shared_features/auth/presentation/store_selection_screen.dart';
+import '../business_types/retail/features/inventory/presentation/inventory_screen.dart';
+import '../business_types/retail/features/pos/presentation/pos_screen.dart' as pos;
+import '../business_types/retail/features/staff/presentation/staff_screen.dart' as staff;
 
 /// App Router configuration using go_router with a ShellRoute that hosts
 /// a Material 3 NavigationBar for 5 primary tabs:

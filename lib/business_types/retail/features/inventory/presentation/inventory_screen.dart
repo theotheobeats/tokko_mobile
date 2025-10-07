@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../app/theme.dart';
-
 class InventoryScreen extends StatelessWidget {
   const InventoryScreen({super.key});
 
@@ -211,10 +209,9 @@ class InventoryScreen extends StatelessWidget {
 }
 
 class _CardContainer extends StatelessWidget {
-  const _CardContainer({required this.child, this.padding, this.background});
+  const _CardContainer({required this.child, this.padding});
   final Widget child;
   final EdgeInsetsGeometry? padding;
-  final Color? background;
 
   @override
   Widget build(BuildContext context) {
@@ -224,11 +221,11 @@ class _CardContainer extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: background ?? (isDark ? scheme.surface : Colors.white),
+        color: isDark ? scheme.surface : Colors.white,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.06),
+            color: Colors.black.withValues(alpha: 0.06),
             blurRadius: 18,
             offset: const Offset(0, 8),
           ),
@@ -367,11 +364,11 @@ class _ProductListTile extends StatelessWidget {
 
     Color stockColor;
     if (stock == 0) {
-      stockColor = AppTheme.error;
+      stockColor = const Color(0xFFDC2626); // error red
     } else if (stock <= 3) {
       stockColor = const Color(0xFFF59E0B); // amber-ish
     } else {
-      stockColor = AppTheme.success;
+      stockColor = const Color(0xFF16A34A); // success green
     }
 
     return Card(
